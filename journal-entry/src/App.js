@@ -1,62 +1,47 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Header from './Components/Header';
 import Product from './Components/Product';
 import ProductList from './Components/ProductList';
 
 
-//function App() {
-class App extends Component {
+function App() {
   
-  state = {
-    entries: [
+  
+  const [loadedProducts, setLoadedProducts] = useState([]);
+  const [currentID, setCurrentID] = useState([1]);
+  const [isLoading, setIsLoading] = useState(false);
 
-    ]
-  }
-   
-  handleSubmit = entry => {
-    this.setState({ items: [...this.state.items, item]})
-  }
+  const addProductHandler = (title, url, description) => {
+    const newProduct = {
+      title: title,
+      url: url,
+      description: description,
+      id: currentID  
+    };
 
-  addProductHandler = (title, url, description) => {
-    try {
-      const newProduct = {
-        title: title,
-        url: url, // "+" to convert string to number
-        description: description // "+" to convert string to number
-        
-      };
-      this.setState({ items: [...this.state.item, item]});
+    setLoadedProducts(prevProducts => {
+      return prevProducts.concat({
+        ...newProduct,
+      });
+    });
 
-      // setLoadedProducts(prevProducts => {
-      //   return prevProducts.concat({
-      //     ...newProduct,
-      //     id: currentID
-      //   });
-      // });
-
-    } catch (error) {
-      alert(error.message || 'Something went wrong!');
-    }
+    setCurrentID(prevID => {
+        return currentID + 1;
+    });
   }
 
-  render(){
-    //const { entries } = this.state;
-
-    return(
-      //<React.Fragment>
-      <div className="App">
-        <Header />
-        <main>
-          <Product onAddProduct={this.addProductHandler} />
-          {/*<Product handleSubmit={this.handleSubmit}/>*/}
-          <ProductList items={this.state.entries} />
-        </main>
-      </div>
-      
-    //</React.Fragment>
-    )
-  }
+  return (
+  
+    <React.Fragment>
+      <Header />
+      <main>
+        <Product onAddProduct={addProductHandler} />
+        {isLoading && <p className="loader">Loading...</p>}
+        {!isLoading && <ProductList items={loadedProducts} />}
+      </main>
+    </React.Fragment>
+  );
     
 
   

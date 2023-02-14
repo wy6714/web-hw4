@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ProductItem from './ProductItem';
-//import './ProductList.css';
+import './ProductList.css';
 
 const ProductList = props => {
   let content;
@@ -11,7 +11,7 @@ const ProductList = props => {
     content = (
       <ul className="Journal List">
         {props.items.map(p => (
-          <ProductItem key={p.id} Title={p.title} URL={p.url} Description={p.description} />
+          <ProductItem key={p.id} title={p.title} url={p.url} description={p.description} />
         ))}
       </ul>
     );

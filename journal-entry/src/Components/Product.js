@@ -23,13 +23,8 @@ const Product = props => {
     props.onAddProduct(enteredTitle, enteredURL, enteredDes);
     }
 
-    const submitForm = () => {
-        this.props.handleSubmit(this.state)
-        this.setState(this.initialState)
-    }
-
     return(
-       <form>
+       <form onSubmit={submitProductHandler}>
         <Input
           type="text"
           label="Title"
