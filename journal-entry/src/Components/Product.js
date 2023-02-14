@@ -47,6 +47,7 @@ const Product = props => {
           onChange={DesChangeHandler}
         />
         <button variant="success" className="btn btn-success" type="submit">Submit</button>
+        <button onClick={() => window.location.reload(true)}>Clear</button>
        </form>
     )
 };
