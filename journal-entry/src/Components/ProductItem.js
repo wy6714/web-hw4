@@ -5,7 +5,7 @@ import React from 'react';
 const ProductItem = props => {
   return (
     <li className="product-item">
-      <h2>Title{props.title}</h2>
+      <h2>Title: {props.title}</h2>
       <p>URL: {props.url}</p>
       <p>Description: {props.description}</p>
     </li>
